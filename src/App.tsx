@@ -7,6 +7,7 @@ function App() {
   liff
     .getProfile()
     .then((result) => {
+      alert(result);
       setProfile({
         'userId' : result.userId,
         'name' : result.displayName,
@@ -21,9 +22,9 @@ function App() {
   return (
     <div className="App">
       <div>
-        <img src={profile.pictureUrl} className="logo react" alt="React logo" />
+        {/* <img src={profile.pictureUrl} className="logo react" alt="React logo" /> */}
       </div>
-      <h1>{ profile.name }</h1>
+      {/* <h1>{ profile.name }</h1> */}
       <div className="card">
       </div>
       <p className="read-the-docs">
