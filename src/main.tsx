@@ -4,21 +4,25 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.scss'
 
+export type Profile = {
+  lineUserId: string;
+  lineDisplayName: string;
+};
+
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
+let profile: Profile = {'lineUserId': '', 'lineDisplayName': ''};
 
 liff
   .init({
     liffId: liffId || '',
-    // withLoginOnExternalBrowser: true
+    withLoginOnExternalBrowser: true
   })
   .then(() => {
     liff
       .getProfile()
       .then((result) => {
-        alert(result.displayName);
-        alert(result.userId);
-        sessionStorage.setItem('lineDisplayName', result.displayName);
-        sessionStorage.setItem('lineUserId', result.userId);
+        profile.lineUserId = result.userId;
+        profile.lineDisplayName = result.displayName;
       })
       .catch((e) => {
         alert(`getProfile error: ${e.message}`)
@@ -27,7 +31,7 @@ liff
   .then(() => {
     ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <React.StrictMode>
-        <App />
+        <App profile={ profile } />
       </React.StrictMode>
     )
   })

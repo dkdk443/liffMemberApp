@@ -2,22 +2,20 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.scss'
 
-function App() {
-  const lineUserId = sessionStorage.getItem('lineUserId');
+const App = (props: any) => {
+  const lineUserId = props.profile.lineUserId;
+  const lineDisplayName = props.profile.lineDisplayName;
 
   return (
     <div className="App">
-      <div>
-      </div>
-      <h1>あなたのUerIDは{ lineUserId }</h1>
       <div className="card">
+        <div>
+          名前：{lineDisplayName}
+        </div>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          あなたのUerIDは{ lineUserId }
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
