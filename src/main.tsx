@@ -15,12 +15,13 @@ let profile: Profile = {'lineUserId': '', 'lineDisplayName': ''};
 liff
   .init({
     liffId: liffId || '',
-    withLoginOnExternalBrowser: true
+    // withLoginOnExternalBrowser: true
   })
   .then(() => {
     liff
       .getProfile()
       .then((result) => {
+        alert(JSON.stringify(result));
         profile.lineUserId = result.userId;
         profile.lineDisplayName = result.displayName;
       })

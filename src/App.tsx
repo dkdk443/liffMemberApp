@@ -5,6 +5,9 @@ import './App.scss'
 const App = (props: any) => {
   const lineUserId = props.profile.lineUserId;
   const lineDisplayName = props.profile.lineDisplayName;
+  alert(JSON.stringify(props));
+  alert(lineUserId);
+
 
   return (
     <div className="App">
