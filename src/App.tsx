@@ -5,12 +5,13 @@ import { useQRCode } from 'next-qrcode';
 
 const App = (props: any) => {
   const lineUserId = props.profile.lineUserId;
+  alert(lineUserId);
   const lineDisplayName = props.profile.lineDisplayName;
   const { Canvas } = useQRCode();
   return (
     <div className="App">
       <div className="card">
-        <Canvas
+        {/* <Canvas
           text={'ここに会員番号を渡す'}
           options={{
             type: 'image/jpeg',
@@ -24,7 +25,7 @@ const App = (props: any) => {
               light: '#FFF',
             },
           }}
-      />
+      /> */}
       </div>
     </div>
   )
