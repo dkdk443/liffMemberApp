@@ -5,19 +5,11 @@ import './App.scss'
 const App = (props: any) => {
   const lineUserId = props.profile.lineUserId;
   const lineDisplayName = props.profile.lineDisplayName;
-  alert('props:'+JSON.stringify(props));
-  alert(lineUserId);
-
 
   return (
     <div className="App">
+      <h2 className='card_title'>デジタル会員証</h2>
       <div className="card">
-        <div>
-          名前：{lineDisplayName}
-        </div>
-        <p>
-          あなたのUerIDは{ lineUserId }
-        </p>
       </div>
     </div>
   )
