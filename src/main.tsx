@@ -15,7 +15,8 @@ liff
     liff
       .getProfile()
       .then((result) => {
-        alert(result);
+        alert(result.displayName);
+        alert(result.userId);
         sessionStorage.setItem('lineDisplayName', result.displayName);
         sessionStorage.setItem('lineUserId', result.userId);
       })
