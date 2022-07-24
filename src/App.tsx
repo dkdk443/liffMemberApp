@@ -11,7 +11,7 @@ const App = (props: any) => {
   return (
     <div className="App">
       <div className="card">
-        {/* <Canvas
+        <Canvas
           text={'ここに会員番号を渡す'}
           options={{
             type: 'image/jpeg',
@@ -25,7 +25,7 @@ const App = (props: any) => {
               light: '#FFF',
             },
           }}
-      /> */}
+      />
       </div>
     </div>
   )
