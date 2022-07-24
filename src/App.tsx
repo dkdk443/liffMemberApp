@@ -18,7 +18,7 @@ const App = (props: any) => {
             level: 'M',
             margin: 3,
             scale: 4,
-            width: 200,
+            width: 240,
             color: {
               dark: '#010599FF',
               light: '#FFF',

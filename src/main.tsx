@@ -21,7 +21,6 @@ liff
     liff
       .getProfile()
       .then((result) => {
-        alert('result:'+JSON.stringify(result));
         profile.lineUserId = result.userId;
         profile.lineDisplayName = result.displayName;
         ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
