@@ -1,31 +1,19 @@
 import { useState } from 'react'
+import reactLogo from './assets/react.svg'
 import './App.scss'
-import liff from '@line/liff/dist/lib';
 
 function App() {
-  const [profile, setProfile] = useState({});
-  liff
-    .getProfile()
-    .then((result) => {
-      alert(result);
-      setProfile({
-        'userId' : result.userId,
-        'name' : result.displayName,
-        'pictureUrl' : result.pictureUrl ? result.pictureUrl : '',
-        'statusMessage' : result.statusMessage ? result.statusMessage : '',
-      })
-    })
-    .catch((err) => {
-      console.log("error", err);
-  });
+  const lineUserId = sessionStorage.getItem('lineUserId');
 
   return (
     <div className="App">
       <div>
-        {/* <img src={profile.pictureUrl} className="logo react" alt="React logo" /> */}
       </div>
-      {/* <h1>{ profile.name }</h1> */}
+      <h1>あなたのUerIDは{ lineUserId }</h1>
       <div className="card">
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more

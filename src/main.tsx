@@ -12,6 +12,18 @@ liff
     // withLoginOnExternalBrowser: true
   })
   .then(() => {
+    liff
+      .getProfile()
+      .then((result) => {
+        alert(result);
+        sessionStorage.setItem('lineDisplayName', result.displayName);
+        sessionStorage.setItem('lineUserId', result.userId);
+      })
+      .catch((e) => {
+        alert(`getProfile error: ${e.message}`)
+      })
+  })
+  .then(() => {
     ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <React.StrictMode>
         <App />
