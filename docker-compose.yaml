@@ -9,4 +9,4 @@ services:
     command: sh -c "npm run dev"
     ports:
       - "5173:5173"
-    stdin_open: true
+    stdin_open: true 
