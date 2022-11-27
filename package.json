@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@line/liff": "^2.20.3",
+    "@mui/icons-material": "^5.10.15",
+    "@mui/material": "^5.10.15",
     "@types/qrcode": "^1.4.2",
     "esbuild-linux-64": "^0.14.49",
     "next-qrcode": "^2.1.0",

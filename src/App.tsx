@@ -13,12 +13,12 @@ const App = (props: any) => {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   `;
-
 
   return (
     <MainContent className="App">
-      <Header></Header>
       <div className="">{ lineDisplayName }</div>
       <QRcode lineUserId={ lineUserId } />
       <LabelBottomNavigation></LabelBottomNavigation>
