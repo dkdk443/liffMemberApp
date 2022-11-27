@@ -9,10 +9,28 @@ export type Profile = {
   lineDisplayName: string;
 };
 
-let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
-let profile: Profile = {'lineUserId': '', 'lineDisplayName': ''};
+const isLiffInClient = liff.isInClient();
 
-liff
+let env = import.meta.env;
+console.log(env);
+
+let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
+let profile: Profile = { 'lineUserId': '', 'lineDisplayName': '' };
+
+// ミニアプリテスト用
+const testProfile: Profile = {
+  lineUserId: "1234457",
+  lineDisplayName: "たなか"
+}
+
+if (!isLiffInClient) {
+ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+          <React.StrictMode>
+            <App profile={ testProfile }/>
+          </React.StrictMode>
+        )
+} else {
+  liff
   .init({
     liffId: liffId || '',
     withLoginOnExternalBrowser: true
@@ -31,9 +49,7 @@ liff
       })
   })
   .catch((e) => {
-    alert(`LIFF error: ${e.message}`)
+    console.log(`LIFF error: ${e.message}`);
   });
 
-
-
-
+}
