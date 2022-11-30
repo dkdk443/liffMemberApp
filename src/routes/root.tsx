@@ -8,17 +8,7 @@ import styled from 'styled-components';
 import QRcode from '../components/QRcode';
 import { Profile } from '../@types/profile';
 
-let isLoading = false;
-
-const isLiffInClient = liff.isInClient();
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
-
-let profile =
-  {
-    'lineUserId': '',
-    'lineDisplayName': '',
-    'linePictureUrl': '',
-}
 
 const liffInit = () => {
   return new Promise<void>((resolve, reject) => {
@@ -69,8 +59,11 @@ function Root() {
     liffInit().then(() => {
       getProfile().then(resp => {
         setProfile({
+          // @ts-ignore
           lineUserId: resp.userId,
+          // @ts-ignore
           lineDisplayName: resp.displayName,
+          // @ts-ignore
           linePictureUrl: resp.pictureUrl
         });
       })
@@ -82,89 +75,10 @@ function Root() {
       <Outlet />
       <img src={profile.linePictureUrl ? profile.linePictureUrl : "" } alt="" width="80px" height="80px" />
       <div className="">{profile.lineDisplayName ? profile.lineDisplayName : "" } さま</div>
-      <QRcode lineUserId={profile.lineUserId ? profile.lineUserId : "000000"} />
       <LabelBottomNavigation></LabelBottomNavigation>
     </MainContent>
   );
 
-  liffInit()
-    .then(() => {
-      getProfile().then(resp => {
-        // alert(JSON.stringify(resp));
-        // profile.lineDisplayName = resp.displayName;
-        // profile.lineUserId = resp.userId;
-        // profile.linePictureUrl = resp.pictureUrl
-        // alert('AA:::' + JSON.stringify(profile));
-        
-      }).then(() => {
-        return (
-          <h1>Hello</h1>
-          // <MainContent className="App">
-          //   <Outlet />
-          //   <div className="">{profile.lineDisplayName}</div>
-          //   <QRcode lineUserId={profile.lineUserId} />
-          //   <LabelBottomNavigation></LabelBottomNavigation>
-          // </MainContent>
-        )
-      });
-    });
-  //   .then(() => {
-  //     isLoading = false;
-  //     return (
-  //       <MainContent className="App">
-  //         <Outlet />
-  //         <div className="">{ profile.lineDisplayName }</div>
-  //         <QRcode lineUserId={ profile.lineUserId } />
-  //         <LabelBottomNavigation></LabelBottomNavigation>
-  //       </MainContent>
-  //     )
-  // })
 }
 
 export default Root
-
-// export default function Root() {
-//   return (
-//     <>
-//       <div id="sidebar">
-//         <h1>React Router Contacts</h1>
-//         <div>
-//           <form id="search-form" role="search">
-//             <input
-//               id="q"
-//               aria-label="Search contacts"
-//               placeholder="Search"
-//               type="search"
-//               name="q"
-//             />
-//             <div
-//               id="search-spinner"
-//               aria-hidden
-//               hidden={true}
-//             />
-//             <div
-//               className="sr-only"
-//               aria-live="polite"
-//             ></div>
-//           </form>
-//           <form method="post">
-//             <button type="submit">New</button>
-//           </form>
-//         </div>
-//         <nav>
-//           <ul>
-//             <li>
-//               <a href={`contacts/1`}>Your Name</a>
-//             </li>
-//             <li>
-//               <a href={`contacts/2`}>Your Friend</a>
-//             </li>
-//           </ul>
-//         </nav>
-//       </div>
-//       <div id="detail">
-//         <Outlet />
-//       </div>
-//     </>
-//   );
-// }
