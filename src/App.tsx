@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.scss'
 
-import Header from './components/Header';
 import LabelBottomNavigation from './components/LabelBottomNavigation';
 import styled from 'styled-components';
 import QRcode from './components/QRcode';

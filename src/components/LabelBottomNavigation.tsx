@@ -1,10 +1,10 @@
-import React from 'react'
 import styled from 'styled-components';
 import EventSeatIcon from '@mui/icons-material/EventSeat';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { Link } from 'react-router-dom';
 
 const LabelBottomNavigation = () => {
   const Nav = styled.div`
@@ -37,13 +37,18 @@ const LabelBottomNavigation = () => {
           <EventSeatIcon />
           予約
         </ButtonItem>
-        <ButtonItem>
-          <QrCodeIcon />
-          会員証</ButtonItem>
-        <ButtonItem>
-          <SentimentSatisfiedAltIcon />
-          マイページ
-        </ButtonItem>
+        <Link to="/member-card">
+          <ButtonItem>
+            <QrCodeIcon />
+            会員証
+          </ButtonItem>
+        </Link>
+        <Link to="/">
+          <ButtonItem >
+            <SentimentSatisfiedAltIcon />
+            マイページ
+            </ButtonItem>
+        </Link>
         <ButtonItem>
           <MailOutlineIcon/>
           お問い合わせ
