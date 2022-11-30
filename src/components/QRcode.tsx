@@ -1,8 +1,9 @@
 import React from 'react'
 import { useQRCode } from 'next-qrcode';
 
-const QRcode = (props) => {
-  let lineUserId = props.lineUserId;
+const QRcode = () => {
+  // let lineUserId = props.lineUserId;
+  let lineUserId = "111111"
   const { Canvas } = useQRCode();
   return (
     <div className="card">
