@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import '../App.scss';
 
 import LabelBottomNavigation from '../components/LabelBottomNavigation';
 import Header from "../components/Header";
