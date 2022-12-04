@@ -11,6 +11,8 @@ import {
 import Index from "./routes/index";
 import './index.scss'
 import liff from '@line/liff/dist/lib';
+import MyPage from './routes/my-page';
+import ContactPage from './routes/contact';
 
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
 
@@ -35,6 +37,7 @@ const liffInit = () => {
 }
 
 async function rootLoad() {
+  // @ts-ignore
   const sessionProfile = JSON.parse(sessionStorage.getItem('profile'));
   // sessionStorageにない時だけAPIから取得する
   if (!sessionProfile) {
@@ -69,6 +72,14 @@ const router = createBrowserRouter([
       {
         path: "/member-card",
         element: <MemberCardPage />,
+      },
+      {
+        path: "/my-page",
+        element: <MyPage />,
+      },
+       {
+        path: "/contact",
+        element: <ContactPage />,
       }
     ]
   },

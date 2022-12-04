@@ -5,7 +5,7 @@ import Icon from '@material-ui/core/Icon';
 const LabelBottomNavigation = () => {
   const Nav = styled.div`
     width: 100vw;
-    background-color: #3371a7;
+    background-color: rgba(48, 97, 96, 1);
     color: #fff;
   `;
 
