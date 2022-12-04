@@ -13,6 +13,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@line/liff": "^2.20.3",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.10.15",
     "@mui/material": "^5.10.15",
     "@types/qrcode": "^1.4.2",
@@ -23,7 +24,9 @@
     "qrcode": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
+    "redux": "^4.2.0",
     "sort-by": "^1.2.0",
     "styled-components": "^5.3.6"
   },
