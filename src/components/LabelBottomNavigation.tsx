@@ -1,11 +1,6 @@
 import styled from 'styled-components';
-import EventSeatIcon from '@mui/icons-material/EventSeat';
-import QrCodeIcon from '@mui/icons-material/QrCode';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
+import Icon from '@material-ui/core/Icon';
 
 const LabelBottomNavigation = () => {
   const Nav = styled.div`
@@ -17,7 +12,7 @@ const LabelBottomNavigation = () => {
   const ButtonList = styled.ul`
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   `;
 
   const ButtonItem = styled.div`
@@ -31,37 +26,53 @@ const LabelBottomNavigation = () => {
     align-items: center;
   `;
 
+  type NavItem = {
+    id: number;
+    path: string;
+    iconName: string;
+    label: string;
+  }
+
+  const navigations:Array<NavItem> = [
+    {
+      id: 1,
+      path: "/",
+      iconName: "home",
+      label: "Home"
+    },
+     {
+      id: 2,
+      path: "/member-card",
+      iconName: "qr_code",
+      label: "会員証"
+    },
+     {
+      id: 3,
+      path: "/contact",
+      iconName: "mail_outline",
+      label: "お問い合わせ"
+    },
+      {
+      id: 4,
+      path: "/my-page",
+      iconName: "sentiment_satisfied_alt",
+      label: "マイページ"
+    },
+  ];
+
   return (
     <Nav>
       <ButtonList>
-        <ButtonItem>
-          <HomeIcon />
-          Home
-        </ButtonItem>
-        <ButtonItem>
-          <EventSeatIcon />
-          予約
-        </ButtonItem>
-        <Link to="/member-card">
-          <ButtonItem>
-            <QrCodeIcon />
-            会員証
-          </ButtonItem>
-        </Link>
-        <Link to="/">
-          <ButtonItem >
-            <SentimentSatisfiedAltIcon />
-            マイページ
-            </ButtonItem>
-        </Link>
-        <ButtonItem>
-          <MailOutlineIcon/>
-          お問い合わせ
-        </ButtonItem>
-        <ButtonItem>
-          <ShoppingBagIcon/>
-          SHOP
-        </ButtonItem>
+        {navigations.map(nav => {
+            return(
+              <Link to={nav.path} key={nav.id}>
+                <ButtonItem>
+                  <Icon>{ nav.iconName }</Icon>
+                  <div className=""> {nav.label}</div>
+                </ButtonItem>
+              </Link>
+            )
+          })}
       </ButtonList>
     </Nav>
   )
