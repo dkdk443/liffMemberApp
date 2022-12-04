@@ -4,6 +4,7 @@ import QrCodeIcon from '@mui/icons-material/QrCode';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 
 const LabelBottomNavigation = () => {
@@ -33,6 +34,10 @@ const LabelBottomNavigation = () => {
   return (
     <Nav>
       <ButtonList>
+        <ButtonItem>
+          <HomeIcon />
+          Home
+        </ButtonItem>
         <ButtonItem>
           <EventSeatIcon />
           予約
