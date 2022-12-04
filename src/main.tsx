@@ -8,11 +8,13 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Index from "./routes/index";
 import './index.scss'
 import liff from '@line/liff/dist/lib';
 
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
 
+// LINEのユーザーデータ取得
 const liffInit = () => {
   return new Promise((resolve, reject) => {
     liff.init({
@@ -34,6 +36,7 @@ const liffInit = () => {
 
 async function rootLoad() {
   const data = await liffInit();
+  sessionStorage.setItem('profile', JSON.stringify(data));
   return new Response(JSON.stringify(data), {
     status: 200,
     headers: {
@@ -50,6 +53,7 @@ const router = createBrowserRouter([
     id: "root",
     errorElement: <ErrorPage />,
     children: [
+      { index: true, element: <Index /> },
       {
         path: "/member-card",
         element: <MemberCardPage />,
