@@ -35,14 +35,26 @@ const liffInit = () => {
 }
 
 async function rootLoad() {
-  const data = await liffInit();
-  sessionStorage.setItem('profile', JSON.stringify(data));
-  return new Response(JSON.stringify(data), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json; utf-8",
-    },
-  });
+  const sessionProfile = JSON.parse(sessionStorage.getItem('profile'));
+  // sessionStorageにない時だけAPIから取得する
+  if (!sessionProfile) {
+    const data = await liffInit();
+    sessionStorage.setItem('profile', JSON.stringify(data));
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json; utf-8",
+      },
+    });
+  } else {
+     return new Response(JSON.stringify(sessionProfile), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json; utf-8",
+      },
+    });
+  }
+
 }
 
 const router = createBrowserRouter([
