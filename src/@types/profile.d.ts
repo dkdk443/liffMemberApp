@@ -1,5 +1,5 @@
 export type Profile = {
-  lineUserId: string;
-  lineDisplayName: string;
-  linePictureUrl: string | undefined;
+  userId: string;
+  displayName: string;
+  pictureUrl: string | undefined;
 };
