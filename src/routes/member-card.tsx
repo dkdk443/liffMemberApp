@@ -11,6 +11,7 @@ const CardTitle = styled.h2`
   font-size: 24px;
   margin: 20px 0;
 `;
+
 export default function MemberCardPage() { 
   const profile = useRouteLoaderData("root");
   return (

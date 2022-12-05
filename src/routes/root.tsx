@@ -4,19 +4,23 @@ import LabelBottomNavigation from '../components/LabelBottomNavigation';
 import Header from "../components/Header";
 import styled from 'styled-components';
 
-function Root() {
-  const MainContent = styled.div`
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  `;
+const MainContent = styled.div`
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+`;
 
+const OutletWrapper = styled.div`
+  overflow-y: scroll;
+`;
+
+function Root() {
   return (
     <MainContent className="App">
       <Header title={"My Jim"} />
-      <Outlet />
+      <OutletWrapper>
+        <Outlet />
+      </OutletWrapper>
       <LabelBottomNavigation></LabelBottomNavigation>
     </MainContent>
   );
