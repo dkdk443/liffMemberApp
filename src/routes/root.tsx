@@ -5,12 +5,14 @@ import Header from "../components/Header";
 import styled from 'styled-components';
 
 const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
   height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
 `;
 
 const OutletWrapper = styled.div`
+  flex: 1;
   overflow-y: scroll;
 `;
 

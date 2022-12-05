@@ -4,6 +4,29 @@
   font-family: 'Noto Sans JP', sans-serif;
 }
 
+.fc .fc-col-header-cell-cushion {
+  display: block;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.fc .fc-toolbar {
+  flex-direction: column;
+  button {
+    width: 60px;
+    font-size: 14px;
+  }
+}
+
+.fc-v-event .fc-event-title {
+  font-size: 12px;
+}
+
+
 /***
     The new CSS reset - version 1.7.3 (last updated 7.8.2022)
     GitHub page: https://github.com/elad2412/the-new-css-reset
