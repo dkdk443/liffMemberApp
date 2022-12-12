@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Icon from '@material-ui/core/Icon';
 import liff from '@line/liff/dist/lib';
-liff
 
 const Nav = styled.div`
   width: 100vw;
@@ -36,26 +35,26 @@ const LabelBottomNavigation = () => {
     label: string;
   }
 
-  const navigations:Array<NavItem> = [
+  const navigations: Array<NavItem> = [
     {
       id: 1,
       path: "/",
       iconName: "home",
       label: "Home"
     },
-     {
+    {
       id: 2,
       path: "/member-card",
       iconName: "qr_code",
       label: "会員証"
     },
-     {
+    {
       id: 3,
-      path: "/contact",
-      iconName: "mail_outline",
-      label: "お問い合わせ"
+      path: "/vending-machine",
+      iconName: "local_drink_icon",
+      label: "自販機"
     },
-      {
+    {
       id: 4,
       path: "/my-page",
       iconName: "sentiment_satisfied_alt",
@@ -63,10 +62,10 @@ const LabelBottomNavigation = () => {
     },
   ];
 
-// iPhoneX~をセーフエリアが必要だとする 
+  // iPhoneX~をセーフエリアが必要だとする
   const isNeedSafeArea = navigator.userAgent.match(/iPhoneX/i) ? true : false;
 
-// Safari判定　　参考：https://tagsqa.com/detail/9178　
+  // Safari判定　　参考：https://tagsqa.com/detail/9178　
   const isSafari = navigator.vendor &&
     navigator.vendor.indexOf('Apple') > -1 &&
     navigator.userAgent &&
@@ -76,18 +75,18 @@ const LabelBottomNavigation = () => {
   const isInLiffClient = liff.isInClient
 
   return (
-    <Nav style={isNeedSafeArea && (isSafari || isInLiffClient) ? { paddingBottom: 'calc(env(safe-area-inset-bottom) + 44px)'} : {paddingBottom: '0px'}}>
+    <Nav style={isNeedSafeArea && (isSafari || isInLiffClient) ? { paddingBottom: 'calc(env(safe-area-inset-bottom) + 44px)' } : { paddingBottom: '0px' }}>
       <ButtonList>
         {navigations.map(nav => {
-            return(
-              <Link to={nav.path} key={nav.id}>
-                <ButtonItem>
-                  <Icon>{ nav.iconName }</Icon>
-                  <div className=""> {nav.label}</div>
-                </ButtonItem>
-              </Link>
-            )
-          })}
+          return (
+            <Link to={nav.path} key={nav.id}>
+              <ButtonItem>
+                <Icon>{nav.iconName}</Icon>
+                <div className=""> {nav.label}</div>
+              </ButtonItem>
+            </Link>
+          )
+        })}
       </ButtonList>
     </Nav>
   )

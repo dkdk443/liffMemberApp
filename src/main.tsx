@@ -1,9 +1,13 @@
-
-import React, { useEffect, useState }  from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client'
 import Root from './routes/root';
+
 import ErrorPage from "./error-page";
 import MemberCardPage from './routes/member-card';
+import MyPage from './routes/my-page';
+import ContactPage from './routes/contact';
+import VendingMachine from './routes/vending-machine';
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,8 +15,7 @@ import {
 import Index from "./routes/index";
 import './index.scss'
 import liff from '@line/liff/dist/lib';
-import MyPage from './routes/my-page';
-import ContactPage from './routes/contact';
+
 
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
 
@@ -23,16 +26,16 @@ const liffInit = () => {
       liffId: liffId || '',
       withLoginOnExternalBrowser: true
     })
-    .then(() => {
-      liff.getProfile()
-        .then((resp) => {
-          resolve(resp);
-        })
-    })
+      .then(() => {
+        liff.getProfile()
+          .then((resp) => {
+            resolve(resp);
+          })
+      })
       .catch((e) => {
-      console.log(`LIFF error: ${e.message}`);
-      reject(e);
-    })
+        console.log(`LIFF error: ${e.message}`);
+        reject(e);
+      })
   })
 }
 
@@ -50,7 +53,7 @@ async function rootLoad() {
       },
     });
   } else {
-     return new Response(JSON.stringify(sessionProfile), {
+    return new Response(JSON.stringify(sessionProfile), {
       status: 200,
       headers: {
         "Content-Type": "application/json; utf-8",
@@ -77,9 +80,9 @@ const router = createBrowserRouter([
         path: "/my-page",
         element: <MyPage />,
       },
-       {
-        path: "/contact",
-        element: <ContactPage />,
+      {
+        path: "/vending-machine",
+        element: <VendingMachine />,
       }
     ]
   },

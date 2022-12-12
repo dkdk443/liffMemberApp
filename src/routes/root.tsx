@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const MainContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 `;
 
@@ -19,7 +19,7 @@ const OutletWrapper = styled.div`
 function Root() {
   return (
     <MainContent className="App">
-      <Header title={"My Jim"} />
+      <Header title={"demo Jim"} />
       <OutletWrapper>
         <Outlet />
       </OutletWrapper>

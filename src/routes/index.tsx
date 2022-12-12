@@ -26,7 +26,7 @@ const TopItem = styled.div`
 const events: Array<Event> = [
   {
     title: '学生クラス',
-    daysOfWeek: ['1'],
+    daysOfWeek: ['1', '3', '5'],
     startTime: '17:00:00',
     endTime: '17:50:00',
     color: 'green'
@@ -54,32 +54,54 @@ const events: Array<Event> = [
   },
   {
     title: 'レディース',
-    daysOfWeek: ['2'],
+    daysOfWeek: ['2', '4'],
     startTime: '20:00:00',
     endTime: '21:00:00',
     color: 'pink'
   },
   {
-    title: '学生クラス',
-    daysOfWeek: ['3'],
-    startTime: '17:00:00',
-    endTime: '18:00:00',
-    color: 'blue'
-  },
-  {
     title: 'エアキックボクシング',
-    daysOfWeek: ['3'],
+    daysOfWeek: ['3', '5'],
     startTime: '19:00:00',
     endTime: '19:50:00',
     color: 'orange'
   },
   {
-    title: '初級クラス',
+    title: '初級クラス　マススパー',
     daysOfWeek: ['3'],
     startTime: '20:00:00',
     endTime: '21:00:00',
     color: 'blue'
   },
+  {
+    title: '中級クラス',
+    daysOfWeek: ['4'],
+    startTime: '18:50:00',
+    endTime: '19:50:00',
+    color: 'blue'
+  },
+  {
+    title: '初級クラス',
+    daysOfWeek: ['6'],
+    startTime: '16:00:00',
+    endTime: '16:50:00',
+    color: 'green'
+  },
+  {
+    title: '中級クラス',
+    daysOfWeek: ['6'],
+    startTime: '18:30:00',
+    endTime: '19:30:00',
+    color: 'blue'
+  },
+  {
+    title: 'ハタヨガ',
+    daysOfWeek: ['6'],
+    startTime: '19:40:00',
+    endTime: '20:40:00',
+    color: 'pink'
+  },
+
 ];
 
 const filterdClass = () => {
@@ -94,17 +116,15 @@ const todayClasses = filterdClass();
 export default function Index() {
   return (
     <IndexContent>
-      <div className="hero" style={{ width: "100%", height: "220px", backgroundImage: "url('/demo_jim.webp')", backgroundPosition: "center", backgroundSize: "cover"}}>
-      </div>
       <TopItems>
         <TopItem>
-          <h3 style={{fontSize: "14px", paddingBottom: "8px"}}>本日のクラス</h3>
+          <h3 style={{ fontSize: "14px", paddingBottom: "8px" }}>本日のクラス</h3>
           <ul style={{ fontSize: "18px" }}>
             {todayClasses.map(item => {
               return (
-                <li style={{ padding: "8px 0"}}>
+                <li style={{ padding: "8px 0" }}>
                   <div>{item.title}</div>
-                  <div><AccessTimeIcon  fontSize="small" sx={{ color: amber[400] }}/> { item.startTime.substring(0,5)} - { item.endTime.substring(0,5) }</div>
+                  <div><AccessTimeIcon fontSize="small" sx={{ color: amber[400] }} /> {item.startTime.substring(0, 5)} - {item.endTime.substring(0, 5)}</div>
                 </li>
               )
             })}
@@ -112,9 +132,9 @@ export default function Index() {
         </TopItem>
       </TopItems>
       <div className="calender" style={{ marginTop: "60px" }}>
-        <h2 style={{ fontWeight: "800" , paddingBottom: "8px"}}>クラススケジュール</h2>
-        <Calender events={ events } />
+        <h2 style={{ fontWeight: "800", paddingBottom: "8px" }}>クラススケジュール</h2>
+        <Calender events={events} />
       </div>
-   </IndexContent>
+    </IndexContent>
   );
 }

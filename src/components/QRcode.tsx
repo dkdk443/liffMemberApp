@@ -1,4 +1,3 @@
-import React from 'react'
 import { useQRCode } from 'next-qrcode';
 import styled from 'styled-components';
 
@@ -29,24 +28,24 @@ const QRcode = (props: any) => {
   } else {
     return (
       <Card>
-          <Canvas
-            text={lineUserId}
-            options={{
-              type: 'image/jpeg',
-              quality: 0.3,
-              level: 'M',
-              margin: 3,
-              scale: 4,
-              width: 240,
-              color: {
-                // dark: '#010599FF',
-                light: '#FFF',
-              },
-            }}
+        <Canvas
+          text={lineUserId}
+          options={{
+            type: 'image/jpeg',
+            quality: 0.3,
+            level: 'M',
+            margin: 3,
+            scale: 4,
+            width: 240,
+            color: {
+              // dark: '#010599FF',
+              light: '#FFF',
+            },
+          }}
         />
-        <div>{ lineUserId }</div>
+        {/* <div>{ lineUserId }</div> */}
       </Card>
-  )
+    )
   }
 
 }
