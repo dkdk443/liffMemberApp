@@ -1,7 +1,7 @@
 import '@fullcalendar/react/dist/vdom';
 import FullCalendar, { EventClickArg } from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { Event } from '../@types/events';
+import { Event } from '../@types/event';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';

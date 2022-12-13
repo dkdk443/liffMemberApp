@@ -16,6 +16,7 @@ import Index from "./routes/index";
 import './index.scss'
 
 import liff from '@line/liff/dist/lib';
+import Item from './routes/item';
 
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
 // LINEのユーザーデータ取得
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "/vending-machine",
         element: <VendingMachine />,
+      },
+      {
+        path: "/vending-machine/:id",
+        element: <Item />,
       }
     ]
   },

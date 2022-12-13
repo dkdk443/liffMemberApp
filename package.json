@@ -21,6 +21,7 @@
     "@mui/material": "^5.10.15",
     "@types/qrcode": "^1.4.2",
     "firebase": "^9.15.0",
+    "framer-motion": "^7.7.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "next-qrcode": "^2.1.0",

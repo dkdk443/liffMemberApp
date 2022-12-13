@@ -1,10 +1,11 @@
-import { useRouteLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ShopItem from "../components/ShopItem";
-import { useEffect } from "react";
 import { ref, getDatabase } from 'firebase/database';
-import { useList, useObject } from 'react-firebase-hooks/database';
+import { useList } from 'react-firebase-hooks/database';
 import { firebase } from "../firebase/firebaseConfig";
+import MenuModal from "../components/MenuModal";
+
 const Items = styled.ul`
   list-style: none;
   display: grid;
@@ -15,28 +16,44 @@ const Title = styled.h2`
   font-size: 20px;
   margin: 20px 0;
 `;
+const ItemModalBack = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vw;
+  background-color: #8989891b;
+`;
+
+const ItemModal = styled.div`
+  background-color: #fff;
+  height: 200px;
+
+`;
 
 const database = getDatabase(firebase);
 export default function VendingMachine() {
   const [snapshots, loading, error] = useList(ref(database, 'items'));
 
-  console.log(loading);
-  console.log(error);
-  if (loading) {
+  if (loading || error) {
     return (<div>読み込み中...</div>);
+  } else {
+    return (
+      <div>
+        <Title>自販機</Title>
+        <Items>
+          {snapshots?.map(item => {
+            const itemVal = item.val();
+            return (
+              <Link to={`./${itemVal.id}`} key={itemVal.id}>
+                <ShopItem
+                  items={itemVal}
+                >
+                </ShopItem>
+              </Link>
+            )
+          })}
+        </Items>
+        <MenuModal />
+      </div>
+    )
   }
-  return (
-    <div>
-      <Title>自販機</Title>
-      <Items>
-        {snapshots?.map(item => {
-          const itemVal = item.val();
-          return (
-            <ShopItem items={itemVal} key={itemVal.id}>
-            </ShopItem>
-          )
-        })}
-      </Items>
-    </div>
-  )
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Calender from '../components/Calender';
-import { Event } from '../@types/events';
+import { Event } from '../@types/event';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { amber } from '@mui/material/colors';
 
