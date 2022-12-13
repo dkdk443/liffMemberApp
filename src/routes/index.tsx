@@ -9,6 +9,15 @@ const IndexContent = styled.div`
   width: 100vw;
 `;
 
+const Hero = styled.div`
+  background-image: url(https://3.bp.blogspot.com/-kiS5brGnbvg/WwJaMNGXovI/AAAAAAABMKk/lizbXhrVHDAX7sjNBOkFMte62WVdVyCBQCLcBGAs/s400/gym_aerobike_people.png);
+  height: 240px;
+  width: 100vw;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+`;
+
 const TopItems = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -24,6 +33,7 @@ const TopItem = styled.div`
 
 const events: Array<Event> = [
   {
+    id: 1,
     title: '学生クラス',
     daysOfWeek: ['1', '3', '5'],
     startTime: '17:00:00',
@@ -31,6 +41,7 @@ const events: Array<Event> = [
     color: 'green'
   },
   {
+    id: 2,
     title: '初級クラス',
     daysOfWeek: ['1'],
     startTime: '19:00:00',
@@ -38,6 +49,7 @@ const events: Array<Event> = [
     color: 'green'
   },
   {
+    id: 3,
     title: '中級クラス',
     daysOfWeek: ['1'],
     startTime: '20:00:00',
@@ -45,6 +57,7 @@ const events: Array<Event> = [
     color: 'blue'
   },
   {
+    id: 4,
     title: '筋トレ・キックボクシング',
     daysOfWeek: ['2'],
     startTime: '18:50:00',
@@ -52,6 +65,7 @@ const events: Array<Event> = [
     color: 'yellow'
   },
   {
+    id: 5,
     title: 'レディース',
     daysOfWeek: ['2', '4'],
     startTime: '20:00:00',
@@ -59,6 +73,7 @@ const events: Array<Event> = [
     color: 'pink'
   },
   {
+    id: 6,
     title: 'エアキックボクシング',
     daysOfWeek: ['3', '5'],
     startTime: '19:00:00',
@@ -66,6 +81,7 @@ const events: Array<Event> = [
     color: 'orange'
   },
   {
+    id: 7,
     title: '初級クラス　マススパー',
     daysOfWeek: ['3'],
     startTime: '20:00:00',
@@ -73,6 +89,7 @@ const events: Array<Event> = [
     color: 'blue'
   },
   {
+    id: 8,
     title: '中級クラス',
     daysOfWeek: ['4'],
     startTime: '18:50:00',
@@ -80,6 +97,7 @@ const events: Array<Event> = [
     color: 'blue'
   },
   {
+    id: 9,
     title: '初級クラス',
     daysOfWeek: ['6'],
     startTime: '16:00:00',
@@ -87,6 +105,7 @@ const events: Array<Event> = [
     color: 'green'
   },
   {
+    id: 10,
     title: '中級クラス',
     daysOfWeek: ['6'],
     startTime: '18:30:00',
@@ -94,6 +113,7 @@ const events: Array<Event> = [
     color: 'blue'
   },
   {
+    id: 11,
     title: 'ハタヨガ',
     daysOfWeek: ['6'],
     startTime: '19:40:00',
@@ -115,13 +135,14 @@ const todayClasses = filterdClass();
 export default function Index() {
   return (
     <IndexContent>
+      <Hero></Hero>
       <TopItems>
         <TopItem style={{ padding: "20px" }}>
           <h3 style={{ fontSize: "20px", paddingBottom: "8px" }}>本日のクラス</h3>
           <ul style={{ fontSize: "18px" }}>
             {todayClasses.map(item => {
               return (
-                <li style={{ padding: "8px 0" }}>
+                <li style={{ padding: "8px 0" }} key={Number(item.id)}>
                   <div>{item.title}</div>
                   <div><AccessTimeIcon fontSize="small" sx={{ color: amber[400] }} /> {item.startTime.substring(0, 5)} - {item.endTime.substring(0, 5)}</div>
                 </li>
