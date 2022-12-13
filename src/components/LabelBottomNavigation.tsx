@@ -17,7 +17,7 @@ const ButtonList = styled.ul`
 `;
 
 const ButtonItem = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   height: 80px;
   justify-content: center;
   display: flex;

@@ -17,9 +17,8 @@ const TopItems = styled.div`
 const TopItem = styled.div`
   background-color: #fff;
   box-shadow: 0px 5px 15px 0px rgba(13, 13, 13, 0.35);
-  padding: 24px;
-  border-radius: 24px;
-  margin:12px;
+  border-radius: 18px;
+  margin: 12px;
   margin-top: 28px;
 `;
 
@@ -117,8 +116,8 @@ export default function Index() {
   return (
     <IndexContent>
       <TopItems>
-        <TopItem>
-          <h3 style={{ fontSize: "14px", paddingBottom: "8px" }}>本日のクラス</h3>
+        <TopItem style={{ padding: "20px" }}>
+          <h3 style={{ fontSize: "20px", paddingBottom: "8px" }}>本日のクラス</h3>
           <ul style={{ fontSize: "18px" }}>
             {todayClasses.map(item => {
               return (
@@ -131,10 +130,14 @@ export default function Index() {
           </ul>
         </TopItem>
       </TopItems>
-      <div className="calender" style={{ marginTop: "60px" }}>
-        <h2 style={{ fontWeight: "800", paddingBottom: "8px" }}>クラススケジュール</h2>
-        <Calender events={events} />
-      </div>
+      <TopItems>
+        <TopItem>
+          <div className="calender">
+            <h3 style={{ fontSize: "20px", fontWeight: "800", padding: "20px" }}>クラススケジュール</h3>
+            <Calender events={events} />
+          </div>
+        </TopItem>
+      </TopItems>
     </IndexContent>
   );
 }

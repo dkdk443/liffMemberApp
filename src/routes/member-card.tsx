@@ -6,17 +6,17 @@ const MemberCard = styled.div`
   height: 100%;
 `;
 
-const CardTitle = styled.h2`
+const Title = styled.h2`
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   margin: 20px 0;
 `;
 
-export default function MemberCardPage() { 
+export default function MemberCardPage() {
   const profile = useRouteLoaderData("root");
   return (
     <MemberCard>
-      <CardTitle>デジタル会員証</CardTitle>
+      <Title>デジタル会員証</Title>
       <QRcode profile={profile} />
     </MemberCard>
   )

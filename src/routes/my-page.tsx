@@ -5,7 +5,6 @@ import { Avatar } from '@mui/material';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import { amber } from '@mui/material/colors';
 
-
 const ImageWrapper = styled.div`
   position: absolute; 
   top: -6%;
@@ -65,29 +64,29 @@ export default function MyPage() {
             alt={profile.displayName}
             sx={{ width: 100, height: 100 }}
           />
-          <div className="">{profile.displayName ? profile.displayName : ""}</div>
+          <div style={{ fontSize: "24px", marginTop: "8px" }}>{profile.displayName ? profile.displayName : ""}</div>
         </ImageWrapper>
         <Rank>
-          <MilitaryTechIcon sx={{ color: amber[400] }}/>
+          <MilitaryTechIcon sx={{ color: amber[400] }} />
           {/* TODO: APIからデータ取得する */}
           がんばる毎日会員
         </Rank>
         <MyPageLargeMenu>
           <div style={{
-              fontSize: "18px",
-              fontWeight: "800"
-            }}>
+            fontSize: "18px",
+            fontWeight: "800"
+          }}>
             今月の利用回数
           </div>
           <div>
             <span style={{ fontSize: "40px", marginRight: "8px" }}>4</span>
             <span style={{ fontSize: "14px", marginRight: "8px" }}>回</span>
-            <span style={{ marginRight: "8px"}}>/</span>
-            <span style={{ marginRight: "8px"}}>30</span>
-            <span style={{ marginRight: "8px", fontSize: "14px"}}>回</span>
+            <span style={{ marginRight: "8px" }}>/</span>
+            <span style={{ marginRight: "8px" }}>30</span>
+            <span style={{ marginRight: "8px", fontSize: "14px" }}>回</span>
           </div>
         </MyPageLargeMenu>
       </MyPageCard>
-   </MyPageContainer>
+    </MyPageContainer>
   );
 }

@@ -14,11 +14,10 @@ import {
 } from "react-router-dom";
 import Index from "./routes/index";
 import './index.scss'
+
 import liff from '@line/liff/dist/lib';
 
-
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
-
 // LINEのユーザーデータ取得
 const liffInit = () => {
   return new Promise((resolve, reject) => {
