@@ -4,6 +4,15 @@ import { ref, getDatabase, DataSnapshot } from 'firebase/database';
 import { useList } from 'react-firebase-hooks/database';
 import { firebase } from "../firebase/firebaseConfig";
 import { ItemType } from "../@types/item-type";
+import { Add } from "@mui/icons-material";
+import { Button } from "@mui/material";
+import { display } from "@mui/system";
+
+const ItemContainer = styled.div`
+  display: grid;
+  grid-template-rows: 1fr 70px;
+  height: 100%;
+`;
 
 const PriceArea = styled.div`
   display: flex;
@@ -50,30 +59,55 @@ export default function Item(props: any) {
   const itemObj = createItemObject(snapshots);
 
   return (
-    <>
+    <ItemContainer>
       {loading && <span>Loading...</span>}
       {!loading && snapshots && (
-        <div>
-          <div style={{
-            backgroundImage: `url(${itemObj.imagePath}`,
-            height: "300px",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "contain",
-            backgroundPosition: "center"
-          }}></div>
-          <h2 style={{
-            fontSize: "20px",
-            padding: "12px 0"
-          }}>{itemObj.name}</h2>
-          <p>{itemObj.detail}</p>
-          <PriceArea>
-            <span style={{ fontSize: "28px", marginRight: "6px" }}>{Number(itemObj.price)}</span>
-            <span>円</span>
-            (税込)
-          </PriceArea>
-        </div>
-      )
-      }
-    </>
+        <>
+          <div>
+            <div style={{
+              backgroundImage: `url(${itemObj.imagePath}`,
+              height: "300px",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center"
+            }}></div>
+            <h2 style={{
+              fontSize: "20px",
+              padding: "12px 0"
+            }}>{itemObj.name}</h2>
+            <p>{itemObj.detail}</p>
+            <PriceArea>
+              <span style={{ fontSize: "28px", marginRight: "6px" }}>{Number(itemObj.price)}</span>
+              <span>円</span>
+              (税込)
+            </PriceArea>
+          </div>
+          <div
+            className="button-container"
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <Button
+              variant="contained"
+              color="warning"
+              style={{
+                width: "300px",
+                marginBottom: "16px"
+              }}
+            >
+              <Add />
+              カートに追加する
+            </Button>
+          </div>
+
+        </>
+      )}
+
+      <div />
+
+    </ItemContainer>
   )
 }
