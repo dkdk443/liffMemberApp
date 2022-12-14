@@ -1,5 +1,6 @@
 import { useQRCode } from 'next-qrcode';
 import styled from 'styled-components';
+import Loading from './Loading';
 
 const Card = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const QRcode = (props: any) => {
 
   if (!lineUserId) {
     return (
-      <div>読み込み中・・・</div>
+      <Loading />
     )
   } else {
     return (

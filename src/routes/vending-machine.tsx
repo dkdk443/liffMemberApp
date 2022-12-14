@@ -5,6 +5,7 @@ import { ref, getDatabase } from 'firebase/database';
 import { useList } from 'react-firebase-hooks/database';
 import { firebase } from "../firebase/firebaseConfig";
 import MenuModal from "../components/MenuModal";
+import Loading from "../components/Loading";
 
 const Items = styled.ul`
   list-style: none;
@@ -34,7 +35,7 @@ export default function VendingMachine() {
   const [snapshots, loading, error] = useList(ref(database, 'items'));
 
   if (loading || error) {
-    return (<div>読み込み中...</div>);
+    return (<Loading />);
   } else {
     return (
       <div>
