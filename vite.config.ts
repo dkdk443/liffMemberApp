@@ -11,5 +11,10 @@ export default defineConfig({
   ],
   server: {
     host: true
-  }
+  },
+  build: {
+    commonjsOptions: {
+      include: [/node_modules/],
+    },
+  },
 })
