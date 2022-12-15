@@ -1,4 +1,4 @@
-import { useQRCode } from 'next-qrcode';
+import QRCode from 'react-qr-code';
 import styled from 'styled-components';
 import Loading from './Loading';
 
@@ -18,9 +18,8 @@ const Card = styled.div`
   font-size: 16px;
 `;
 
-const QRcode = (props: any) => {
+const QRcodeItem = (props: any) => {
   let lineUserId = props.profile.userId;
-  const { Canvas } = useQRCode();
 
   if (!lineUserId) {
     return (
@@ -29,20 +28,11 @@ const QRcode = (props: any) => {
   } else {
     return (
       <Card>
-        <Canvas
-          text={lineUserId}
-          options={{
-            type: 'image/jpeg',
-            quality: 0.3,
-            level: 'M',
-            margin: 3,
-            scale: 4,
-            width: 240,
-            color: {
-              // dark: '#010599FF',
-              light: '#FFF',
-            },
-          }}
+        <QRCode
+          value={lineUserId}
+          size={256}
+          style={{ height: "auto", maxWidth: "200px", width: "200px" }}
+          viewBox={`0 0 256 256`}
         />
         {/* <div>{ lineUserId }</div> */}
       </Card>
@@ -51,4 +41,4 @@ const QRcode = (props: any) => {
 
 }
 
-export default QRcode
+export default QRcodeItem

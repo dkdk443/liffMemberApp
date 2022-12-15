@@ -1,4 +1,4 @@
-import QRcode from "../components/QRcode"
+import QRcodeItem from "../components/QRcode"
 import { useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
 
@@ -17,7 +17,7 @@ export default function MemberCardPage() {
   return (
     <MemberCard>
       <Title>デジタル会員証</Title>
-      {/* <QRcode profile={profile} /> */}
+      <QRcodeItem profile={profile} />
     </MemberCard>
   )
 }
