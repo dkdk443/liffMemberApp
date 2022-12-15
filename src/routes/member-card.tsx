@@ -17,7 +17,7 @@ export default function MemberCardPage() {
   return (
     <MemberCard>
       <Title>デジタル会員証</Title>
-      <QRcode profile={profile} />
+      {/* <QRcode profile={profile} /> */}
     </MemberCard>
   )
 }

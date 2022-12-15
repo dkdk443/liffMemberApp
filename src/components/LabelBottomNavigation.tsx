@@ -42,12 +42,12 @@ const LabelBottomNavigation = () => {
       iconName: "home",
       label: "Home"
     },
-    {
-      id: 2,
-      path: "/member-card",
-      iconName: "qr_code",
-      label: "会員証"
-    },
+    // {
+    //   id: 2,
+    //   path: "/member-card",
+    //   iconName: "qr_code",
+    //   label: "会員証"
+    // },
     {
       id: 3,
       path: "/vending-machine",
