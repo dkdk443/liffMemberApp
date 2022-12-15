@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     // @ts-ignore
-    viteCommonjs(['ext-qrcode', 'qrcode'])
+    viteCommonjs(['@types/qrcode', 'next-qrcode', 'qrcode'])
   ],
   server: {
     host: true
