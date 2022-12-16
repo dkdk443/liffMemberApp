@@ -6,7 +6,7 @@ import ErrorPage from "./error-page";
 import MemberCardPage from './routes/member-card';
 import MyPage from './routes/my-page';
 import ContactPage from './routes/contact';
-import VendingMachine from './routes/vending-machine';
+import Shop from './routes/shop';
 
 import {
   createBrowserRouter,
@@ -17,6 +17,7 @@ import './index.scss'
 
 import liff from '@line/liff/dist/lib';
 import Item from './routes/item';
+import Cart from './routes/cart';
 
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
 // LINEのユーザーデータ取得
@@ -81,12 +82,16 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: "/vending-machine",
-        element: <VendingMachine />,
+        path: "/shop",
+        element: <Shop />,
       },
       {
-        path: "/vending-machine/:id",
+        path: "/shop/:id",
         element: <Item />,
+      },
+      {
+        path: "/shop/cart",
+        element: <Cart />,
       }
     ]
   },

@@ -31,7 +31,7 @@ const ItemModal = styled.div`
 `;
 
 const database = getDatabase(firebase);
-export default function VendingMachine() {
+export default function Shop() {
   const [snapshots, loading, error] = useList(ref(database, 'items'));
 
   if (loading || error) {

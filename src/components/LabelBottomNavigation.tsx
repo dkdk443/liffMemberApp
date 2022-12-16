@@ -50,7 +50,7 @@ const LabelBottomNavigation = () => {
     },
     {
       id: 3,
-      path: "/vending-machine",
+      path: "/shop",
       iconName: "local_drink_icon",
       label: "自販機"
     },
