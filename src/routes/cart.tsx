@@ -9,10 +9,12 @@ import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from "react";
+import { useCookies } from 'react-cookie';
+import { CartItem } from "../@types/cart";
 
 const CartContainer = styled.div`
   position: relative;
-
 `;
 
 const Title = styled.h2`
@@ -23,6 +25,8 @@ const Title = styled.h2`
 
 
 export default function Cart(props: any) {
+  const [cookies, setCookie] = useCookies(['cart']);
+  const [cart, setCart] = useState<CartItem[]>(cookies.cart || []);
   return (
     <>
       <Title>カート</Title>
@@ -34,25 +38,29 @@ export default function Cart(props: any) {
             bgcolor: 'background.paper',
             position: 'relative',
             overflow: 'auto',
-            maxHeight: 300,
+            height: 400,
             '& ul': { padding: 0 },
           }}
           subheader={<li />}
         >
-          <ListItem
-            secondaryAction={
-              <IconButton edge="end" aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <ImageIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-          </ListItem>
+          {cart.map((item: CartItem, i) => (
+            <ListItem
+              key={i}
+              secondaryAction={
+                <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              }
+            >
+              <ListItemAvatar>
+                <Avatar src={item.imagePath}>
+                  <ImageIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={item.name} secondary={item.price} />
+            </ListItem>
+          ))
+          }
         </List>
         <div
           className="button-container"

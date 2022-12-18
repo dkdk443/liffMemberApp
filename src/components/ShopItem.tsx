@@ -27,7 +27,6 @@ const ShopItem = (props: any) => {
       <ItemDetail>
         <div
           className="item-name"
-          style={{ fontSize: "18px" }}
         >{name}</div>
         <div className="item-price">{price}円<span
           style={{ fontSize: "12px" }}

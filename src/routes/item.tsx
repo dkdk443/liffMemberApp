@@ -1,12 +1,15 @@
-import { useParams, useRouteLoaderData } from "react-router-dom";
+import { NavigateFunction, useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import { ref, getDatabase, DataSnapshot } from 'firebase/database';
 import { useList } from 'react-firebase-hooks/database';
 import { firebase } from "../firebase/firebaseConfig";
 import { ItemType } from "../@types/item-type";
 import { Add } from "@mui/icons-material";
-import { Button } from "@mui/material";
-import { display } from "@mui/system";
+import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import Loading from "../components/Loading";
+import { useCart } from "../hooks/useCart";
+import { useState } from "react";
+import { CartItem, CartType } from "../@types/cart";
 
 const ItemContainer = styled.div`
   display: grid;
@@ -22,12 +25,13 @@ const PriceArea = styled.div`
 `;
 
 const createItemObject = (snapshots: DataSnapshot[] | undefined) => {
-  let itemObj: ItemType = {
+  let itemObj: CartItem = {
     id: 0,
     name: "",
     detail: "",
     imagePath: "",
-    price: 0
+    price: 0,
+    quantity: 0
   };
   snapshots?.map(v => {
     switch (v.key) {
@@ -48,19 +52,24 @@ const createItemObject = (snapshots: DataSnapshot[] | undefined) => {
         break;
     }
   })
+  itemObj.quantity = 0;
   return itemObj;
 }
 
 const database = getDatabase(firebase);
+
 export default function Item(props: any) {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [snapshots, loading, error] = useList(ref(database, `items/${Number(id) - 1}`));
+  const [quantity, setQuantity] = useState(1);
+  const [cartItem, setCartItem] = useState(createItemObject(snapshots));
   const itemObj = createItemObject(snapshots);
+  const { addCart } = useCart();
 
   return (
     <ItemContainer>
-      {loading && <span>Loading...</span>}
+      {loading && <Loading />}
       {!loading && snapshots && (
         <>
           <div>
@@ -71,16 +80,47 @@ export default function Item(props: any) {
               backgroundSize: "contain",
               backgroundPosition: "center"
             }}></div>
-            <h2 style={{
-              fontSize: "20px",
-              padding: "12px 0"
-            }}>{itemObj.name}</h2>
-            <p>{itemObj.detail}</p>
-            <PriceArea>
-              <span style={{ fontSize: "28px", marginRight: "6px" }}>{Number(itemObj.price)}</span>
-              <span>円</span>
-              (税込)
-            </PriceArea>
+            <div style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "12px"
+            }}>
+              <div style={{
+                fontSize: "22px",
+                padding: "12px 0",
+                fontWeight: "bold"
+              }}>{itemObj.name}</div>
+              <p>{itemObj.detail}</p>
+              <div style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "12px 0"
+              }}>
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <InputLabel id="quantity-label">数量</InputLabel>
+                  <Select
+                    labelId="quantity-label"
+                    id="quantity-select"
+                    value={quantity}
+                    label="数量"
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                  >
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                  </Select>
+                </FormControl>
+                <PriceArea>
+                  <span style={{ fontSize: "28px", marginRight: "6px" }}>{Number(itemObj.price)}</span>
+                  <span>円</span>
+                  (税込)
+                </PriceArea>
+              </div>
+            </div>
           </div>
           <div
             className="button-container"
@@ -97,6 +137,7 @@ export default function Item(props: any) {
                 width: "300px",
                 marginBottom: "16px"
               }}
+              onClick={() => addCart(itemObj, quantity)}
             >
               <Add />
               カートに追加する
