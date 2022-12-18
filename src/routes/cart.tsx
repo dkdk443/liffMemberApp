@@ -9,9 +9,10 @@ import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useState } from "react";
-import { useCookies } from 'react-cookie';
+import { Key } from "react";
 import { CartItem } from "../@types/cart";
+import { useDispatch, useSelector } from "react-redux";
+import { removeCart } from "../redux/cartSlice";
 
 const CartContainer = styled.div`
   position: relative;
@@ -23,10 +24,10 @@ const Title = styled.h2`
   margin: 20px 0;
 `;
 
-
 export default function Cart(props: any) {
-  const [cookies, setCookie] = useCookies(['cart']);
-  const [cart, setCart] = useState<CartItem[]>(cookies.cart || []);
+  // @ts-ignore
+  const cart = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
   return (
     <>
       <Title>カート</Title>
@@ -43,11 +44,15 @@ export default function Cart(props: any) {
           }}
           subheader={<li />}
         >
-          {cart.map((item: CartItem, i) => (
+          {cart.map((item: CartItem, i: Key | null | undefined) => (
             <ListItem
               key={i}
               secondaryAction={
-                <IconButton edge="end" aria-label="delete">
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  // @ts-ignore
+                  onClick={() => dispatch(removeCart(item))}>
                   <DeleteIcon />
                 </IconButton>
               }
@@ -57,7 +62,7 @@ export default function Cart(props: any) {
                   <ImageIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={item.name} secondary={item.price} />
+              <ListItemText primary={item.name} secondary={`${item.price} 円　× ${item.quantity}`} />
             </ListItem>
           ))
           }

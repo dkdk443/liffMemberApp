@@ -1,4 +1,4 @@
-import { NavigateFunction, useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import { ref, getDatabase, DataSnapshot } from 'firebase/database';
 import { useList } from 'react-firebase-hooks/database';
@@ -7,9 +7,9 @@ import { ItemType } from "../@types/item-type";
 import { Add } from "@mui/icons-material";
 import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Loading from "../components/Loading";
-import { useCart } from "../hooks/useCart";
-import { useState } from "react";
-import { CartItem, CartType } from "../@types/cart";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCart } from "../redux/cartSlice";
 
 const ItemContainer = styled.div`
   display: grid;
@@ -25,13 +25,12 @@ const PriceArea = styled.div`
 `;
 
 const createItemObject = (snapshots: DataSnapshot[] | undefined) => {
-  let itemObj: CartItem = {
+  let itemObj: ItemType = {
     id: 0,
     name: "",
     detail: "",
     imagePath: "",
     price: 0,
-    quantity: 0
   };
   snapshots?.map(v => {
     switch (v.key) {
@@ -52,7 +51,7 @@ const createItemObject = (snapshots: DataSnapshot[] | undefined) => {
         break;
     }
   })
-  itemObj.quantity = 0;
+
   return itemObj;
 }
 
@@ -60,12 +59,15 @@ const database = getDatabase(firebase);
 
 export default function Item(props: any) {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const [snapshots, loading, error] = useList(ref(database, `items/${Number(id) - 1}`));
+  const [snapshots, loading] = useList(ref(database, `items/${Number(id) - 1}`));
   const [quantity, setQuantity] = useState(1);
   const [cartItem, setCartItem] = useState(createItemObject(snapshots));
   const itemObj = createItemObject(snapshots);
-  const { addCart } = useCart();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setCartItem(cartItem);
+  }, [quantity]);
 
   return (
     <ItemContainer>
@@ -98,7 +100,7 @@ export default function Item(props: any) {
                 alignItems: "center",
                 padding: "12px 0"
               }}>
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                {/* <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                   <InputLabel id="quantity-label">数量</InputLabel>
                   <Select
                     labelId="quantity-label"
@@ -113,7 +115,7 @@ export default function Item(props: any) {
                     <MenuItem value={4}>4</MenuItem>
                     <MenuItem value={5}>5</MenuItem>
                   </Select>
-                </FormControl>
+                </FormControl> */}
                 <PriceArea>
                   <span style={{ fontSize: "28px", marginRight: "6px" }}>{Number(itemObj.price)}</span>
                   <span>円</span>
@@ -130,18 +132,21 @@ export default function Item(props: any) {
               justifyContent: "center"
             }}
           >
-            <Button
-              variant="contained"
-              color="warning"
-              style={{
-                width: "300px",
-                marginBottom: "16px"
-              }}
-              onClick={() => addCart(itemObj, quantity)}
-            >
-              <Add />
-              カートに追加する
-            </Button>
+            <Link to="/shop/cart">
+              <Button
+                variant="contained"
+                color="warning"
+                style={{
+                  width: "300px",
+                  marginBottom: "16px"
+                }}
+                // @ts-ignore
+                onClick={() => dispatch(addCart({ ...itemObj, ...{ quantity: Number(quantity) } }))}
+              >
+                <Add />
+                カートに追加する
+              </Button>
+            </Link>
           </div>
 
         </>

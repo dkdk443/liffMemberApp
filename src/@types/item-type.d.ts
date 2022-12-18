@@ -1,8 +1,7 @@
 export type ItemType = {
-  quantity: number;
-  id: Number;
-  name: String;
+  id: number;
+  name: string;
   detail: string;
   imagePath: string;
-  price: Number;
+  price: number;
 }

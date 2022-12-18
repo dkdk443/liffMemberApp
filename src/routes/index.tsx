@@ -138,8 +138,8 @@ export default function Index() {
       <Hero></Hero>
       <TopItems>
         <TopItem style={{ padding: "20px" }}>
-          <h3 style={{ fontSize: "20px", paddingBottom: "8px" }}>本日のクラス</h3>
-          <ul style={{ fontSize: "18px" }}>
+          <h3 style={{ fontSize: "18px", paddingBottom: "8px" }}>本日のクラス</h3>
+          <ul style={{ fontSize: "16px" }}>
             {todayClasses.map(item => {
               return (
                 <li style={{ padding: "8px 0" }} key={Number(item.id)}>
@@ -154,7 +154,7 @@ export default function Index() {
       <TopItems>
         <TopItem>
           <div className="calender">
-            <h3 style={{ fontSize: "20px", fontWeight: "800", padding: "20px" }}>クラススケジュール</h3>
+            <h3 style={{ fontSize: "18px", fontWeight: "800", padding: "20px" }}>クラススケジュール</h3>
             <Calender events={events} />
           </div>
         </TopItem>

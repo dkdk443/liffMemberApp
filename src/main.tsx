@@ -7,19 +7,23 @@ import MemberCardPage from './routes/member-card';
 import MyPage from './routes/my-page';
 import ContactPage from './routes/contact';
 import Shop from './routes/shop';
+import Index from "./routes/index";
+import './index.scss'
+import { AnyAction, configureStore } from "@reduxjs/toolkit";
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Index from "./routes/index";
-import './index.scss'
+import { Provider } from 'react-redux';
 
 import liff from '@line/liff/dist/lib';
 import Item from './routes/item';
 import Cart from './routes/cart';
+import { store } from './redux/store';
 
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
+
 // LINEのユーザーデータ取得
 const liffInit = () => {
   return new Promise((resolve, reject) => {
@@ -41,6 +45,7 @@ const liffInit = () => {
 }
 
 async function rootLoad() {
+  // if (liff.isInClient()) {
   // @ts-ignore
   const sessionProfile = JSON.parse(sessionStorage.getItem('profile'));
   // sessionStorageにない時だけAPIから取得する
@@ -61,7 +66,14 @@ async function rootLoad() {
       },
     });
   }
-
+  // } else {
+  //   return new Response(JSON.stringify({ name: "aaa", userId: "1234567" }), {
+  //     status: 200,
+  //     headers: {
+  //       "Content-Type": "application/json; utf-8",
+  //     },
+  //   });
+  // }
 }
 
 const router = createBrowserRouter([
@@ -99,6 +111,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
