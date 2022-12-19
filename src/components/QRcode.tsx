@@ -8,7 +8,6 @@ const Card = styled.div`
   justify-content: center;
   flex-direction: column;
   color: #333333;
-  background-color: #f4f4f4;
   font-size: 30px;
   min-width: 300px;
   min-height: 300px;
