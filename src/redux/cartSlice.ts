@@ -9,11 +9,24 @@ export const cartSlice = createSlice({
   reducers: {
     addCart: (state, action: PayloadAction<CartItem>) => {
       if (state.items.some(item => item.id === action.payload.id)) {
-        const newQuantity = Number(action.payload.quantity);
-        const updatedItem = { ...action.payload, ...{ quantity: newQuantity + 1 } }
-        state.items = [...state.items];
+        const targetItem = state.items.find(item => item.id === action.payload.id);
+
+        const beforeQuantity = targetItem ? targetItem.quantity : 1;
+        const addQuantity = Number(action.payload.quantity);
+        const newQuantity = beforeQuantity + addQuantity;
+
+        const updatedItem = { ...action.payload, quantity: newQuantity }
+
+        const updatedItems = state.items.map(item => {
+          if (item.id === updatedItem.id) {
+            return updatedItem;
+          } else {
+            return item;
+          }
+        })
+        state.items = updatedItems;
       } else {
-        state.items = [...state.items, action.payload];
+        state.items.push(action.payload);
       }
     },
     removeCart: (state, action: PayloadAction<CartItem>) => {
