@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import PaymentIcon from '@mui/icons-material/Payment';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -12,10 +12,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Key } from "react";
 import { CartItem } from "../@types/cart";
 import { useDispatch, useSelector } from "react-redux";
-import { removeCart } from "../redux/cartSlice";
+import { removeCart } from "../redux/slice/cartSlice";
 
 const CartContainer = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Title = styled.h2`
@@ -24,10 +27,27 @@ const Title = styled.h2`
   margin: 20px 0;
 `;
 
+const TotalPriceArea = styled.div`
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 8px 12px;
+  min-width: 300px;
+  align-items: center;
+`;
+
+function getTotalPrice(cartItems: CartItem[]): number {
+  return cartItems.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+  }, 0);
+}
+
 export default function Cart(props: any) {
   // @ts-ignore
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+  const totalPrice = getTotalPrice(cart);
   return (
     <>
       <Title>カート</Title>
@@ -67,15 +87,21 @@ export default function Cart(props: any) {
           ))
           }
         </List>
+
         <div
           className="button-container"
           style={{
             width: "100%",
             display: "flex",
             justifyContent: "center",
-            position: "absolute"
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
+          <TotalPriceArea>
+            <div>合計</div>
+            <div><span style={{ fontSize: "22px" }}>{totalPrice}</span>円<span style={{ fontSize: "12px" }}>（税込）</span></div>
+          </TotalPriceArea>
           <Button
             variant="contained"
             color="warning"

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartItem } from "../@types/cart";
+import { CartItem } from "../../@types/cart";
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -8,6 +8,7 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addCart: (state, action: PayloadAction<CartItem>) => {
+      // カートに同じ商品がすでに存在している場合
       if (state.items.some(item => item.id === action.payload.id)) {
         const targetItem = state.items.find(item => item.id === action.payload.id);
 
@@ -31,7 +32,7 @@ export const cartSlice = createSlice({
     },
     removeCart: (state, action: PayloadAction<CartItem>) => {
       state.items = state.items.filter(item => item.id !== action.payload.id)
-    }
+    },
   }
 });
 

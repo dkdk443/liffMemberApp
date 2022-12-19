@@ -9,7 +9,7 @@ import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material
 import Loading from "../components/Loading";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addCart } from "../redux/cartSlice";
+import { addCart } from "../redux/slice/cartSlice";
 
 const ItemContainer = styled.div`
   display: grid;
