@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client'
 import Root from './routes/root';
-
 import ErrorPage from "./error-page";
 import MemberCardPage from './routes/member-card';
 import MyPage from './routes/my-page';
-import ContactPage from './routes/contact';
 import Shop from './routes/shop';
 import Index from "./routes/index";
 import './index.scss'
-import { AnyAction, configureStore } from "@reduxjs/toolkit";
-
 import {
   createBrowserRouter,
+  redirect,
   RouterProvider,
 } from "react-router-dom";
 import { Provider } from 'react-redux';
-
+import { store } from './redux/store';
 import liff from '@line/liff/dist/lib';
 import Item from './routes/item';
 import Cart from './routes/cart';
-import { store } from './redux/store';
+import { Profile } from './@types/profile';
 
 let liffId = import.meta.env.VITE_REACT_APP_LIFF_ID
 
@@ -44,36 +41,33 @@ const liffInit = () => {
   })
 }
 
+const createResponse = (data: any, status: number) => {
+  return new Response(JSON.stringify(data), {
+    status: status,
+    headers: {
+      "Content-Type": "application/json; utf-8",
+    },
+  })
+}
+
 async function rootLoad() {
-  // if (liff.isInClient()) {
-  // @ts-ignore
-  const sessionProfile = JSON.parse(sessionStorage.getItem('profile'));
-  // sessionStorageにない時だけAPIから取得する
-  if (!sessionProfile) {
-    const data = await liffInit();
-    sessionStorage.setItem('profile', JSON.stringify(data));
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json; utf-8",
-      },
-    });
+  // webブラウザの場合はテストユーザーにしておく
+  if (!liff.isInClient()) {
+    const testProfile: Profile = { userId: "123456789", displayName: "はなこ", pictureUrl: "https://uploads-ssl.webflow.com/603c87adb15be3cb0b3ed9b5/615998755abd8e73ef838522_89.png" }
+    return createResponse(testProfile, 200);
   } else {
-    return new Response(JSON.stringify(sessionProfile), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json; utf-8",
-      },
-    });
+    // @ts-ignore
+    const sessionProfile: Profile = JSON.parse(sessionStorage.getItem('profile'));
+    // sessionStorageにない時だけAPIから取得する
+    if (!sessionProfile) {
+      const data = await liffInit();
+      sessionStorage.setItem('profile', JSON.stringify(data));
+      return createResponse(data, 200);
+    } else {
+      return createResponse(sessionProfile, 200);
+    }
   }
-  // } else {
-  //   return new Response(JSON.stringify({ name: "aaa", userId: "1234567" }), {
-  //     status: 200,
-  //     headers: {
-  //       "Content-Type": "application/json; utf-8",
-  //     },
-  //   });
-  // }
+
 }
 
 const router = createBrowserRouter([
@@ -106,7 +100,7 @@ const router = createBrowserRouter([
         element: <Cart />,
       }
     ]
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
