@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, Card } from "@mui/material";
+import { Button, Card, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import PaymentIcon from '@mui/icons-material/Payment';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -9,10 +9,11 @@ import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Key } from "react";
+import { Key, useState } from "react";
 import { CartItem } from "../@types/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { removeCart } from "../redux/slice/cartSlice";
+import { AlertDialog } from "../components/AlertDialog";
 
 const CartContainer = styled.div`
   display: flex;
@@ -48,6 +49,17 @@ export default function Cart(props: any) {
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const totalPrice = getTotalPrice(cart);
+
+  const [open, setOpen] = useState(false);
+
+  const showComfirmModal = (arg0: boolean) => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <Title>カート</Title>
@@ -64,7 +76,7 @@ export default function Cart(props: any) {
           }}
           subheader={<li />}
         >
-          {cart.map((item: CartItem, i: Key | null | undefined) => (
+          {cart.map((item: CartItem, i: Key) => (
             <ListItem
               key={i}
               secondaryAction={
@@ -109,10 +121,12 @@ export default function Cart(props: any) {
               width: "300px",
               marginBottom: "16px"
             }}
+            onClick={() => showComfirmModal(true)}
           >
             <PaymentIcon />
             決済に進む
           </Button>
+          <AlertDialog dialogs={{ open: open, setOpen: setOpen, onClose: handleClose, title: '決済に進みますか？', content: "", price: totalPrice }} />
         </div>
 
         <div />
