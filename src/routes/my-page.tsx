@@ -1,7 +1,7 @@
 import { useRouteLoaderData } from "react-router-dom";
 import { Profile } from "../@types/profile";
 import styled from 'styled-components';
-import { Avatar } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import { amber } from '@mui/material/colors';
 
@@ -27,7 +27,7 @@ const MyPageCard = styled.div`
   box-shadow: -2px -8px 15px -12px rgba(13, 13, 13, 0.5);
   border-radius: 40px 40px 0 0;
   height: 72vh;
-  width: 100vw;
+  width: 100%;
   position: relative;
   background-color: #f4f4f4;
   display: flex;

@@ -4,6 +4,9 @@ import styled from "styled-components";
 
 const MemberCard = styled.div`
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.h2`

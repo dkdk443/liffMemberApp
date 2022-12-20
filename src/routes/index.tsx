@@ -6,7 +6,7 @@ import { amber } from '@mui/material/colors';
 
 const IndexContent = styled.div`
   height: 100%;
-  width: 100vw;
+  width: 100%;
 `;
 
 const Hero = styled.div`

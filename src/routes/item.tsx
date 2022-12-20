@@ -15,6 +15,7 @@ const ItemContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr 70px;
   height: 100%;
+
 `;
 
 const PriceArea = styled.div`
